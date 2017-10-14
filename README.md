@@ -49,19 +49,32 @@ Instructions on how to run the emulator are in the code itself, but I shall writ
                                                                      * 00002900
                                                                      * 00003000
                                                                      * 00003100
+
  16K BYTES ARE SET ASIDE FOR SIMULATED CORE, WITH EACH BYTE HAVING   * 00003200
+
  THE FOLOWING FORMAT.                                                * 00003300
+
      360 BIT        1401 BIT                                         * 00003400
+
         0            UNUSED                                          * 00003500
+
         1           WORD MARK                                        * 00003600
+
         2               B                                            * 00003700
+
         3               A                                            * 00003800
+
         4               8                                            * 00003900
+
         5               4                                            * 00004000
+
         6               2                                            * 00004100
+
         7               1                                            * 00004200
+
                                                                      * 00004300
                                                                      * 00004400
+
 ********************************************************************** 00004500
 
 
