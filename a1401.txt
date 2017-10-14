@@ -228,9 +228,9 @@ AL1I   IC      2,0(12)           GET B-FIELD DIGIT                      00016200
        BE      AL1J              YES                                    00017200
        IC      4,0(11)           NO, GET A-FIELD DIGIT                  00017300
        N       4,=F'15'          *                                      00017400
-         C     4,=F'11'          Q/ IS DIGIT NUMERIC                    00017500
-         BL    *+8               YES                                    00017600
-         S     4,=F'8'           NO, ELIMINATE 8 BIT                    00017700
+       C     4,=F'11'          Q/ IS DIGIT NUMERIC                    00017500
+       BL    *+8               YES                                    00017600
+       S     4,=F'8'           NO, ELIMINATE 8 BIT                    00017700
        CH      4,=H'10'          Q/ ZERO                                00017800
        BNE     *+6               NO                                     00017900
        SR      4,4               YES, CLEAR IT                          00018000
@@ -479,6 +479,7 @@ DCHARTBL DC    A(BL5BCH),11A(NXTOP),A(BL52),4A(NXTOP),A(BL51,BL5S)      00041900
          DC    A(BL5K,BL5L),3A(NXTOP),A(BL5P,NXTOP,BL5P,BL5PER)         00042100
          DC    6A(NXTOP),A(BL5A,BL5B,BL5C,BL5D,BL5E,BL5F,BL5G)          00042200
          DC    2A(NXTOP),A(BL5RER),5A(NXTOP)                            00042300
+*
        TITLE  'BRANCH ON WORD MARK / ZONE'                              00042400
        USING   BWZ,13                                                   00042500
 BWZ    CH      9,=H'1'                                                  00042600
