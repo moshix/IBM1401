@@ -2,7 +2,7 @@
 
 This is an emulator for the venerable IBM 1401 mainframe computer of the early 60s. 
 
-It is written in S/360 assembler and assembles (almost) cleanly with the IFOX assembler of MVS 3.8 put 8505 as delivered by the TK4 turnkey system 
+It is written in S/360 assembler and assembles with some (for me) unresolvable problems with the Waterloo University Assembler G for  MVS 3.8. You can find the Assembler G here: http://www.jaymoseley.com/hercules/compilers/list_of.htm#ASMG27A
 
 Instructions on how to run the emulator are in the code itself, but I shall write up a manual, and also make a youtube video available on how to get it to run. 
 
