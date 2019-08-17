@@ -1,11 +1,9 @@
 //HERC01A      JOB (BAL),
 //             '1401 EMULATOR',
 //             CLASS=A,
-//             MSGCLASS=H,
-//             TIME=1440,REGION=6M,
-//             MSGLEVEL=(1,1),
-// USER=HERC01,PASSWORD=CUL8TR
-//********************************************************************
+//             MSGCLASS=A,
+//             REGION=1024K
+//*********************************************************************
 //*
 //* Name: A1401
 //*
@@ -13,19 +11,16 @@
 //*
 //********************************************************************
 //A1401    EXEC ASMFCG,PARM.ASM=(OBJ,NODECK),MAC1='SYS2.MACLIB',
-//             REGION.GO=1228K,PARM.GO='/2000'
-//**DDX       DD DSN=HERC01.SIM1401,
-//**             VOL=SER=PUB001,
-//**             SPACE=(TRK,1),
-//**             DISP=(MOD,DELETE)
-//**STEP2        EXEC PGM=IEBUPDTE,PARM=NEW,REGION=40K
-//SYSPRINT  DD SYSOUT=*
-//**SYSUT2    DD DSN=HERC01.A1401,
-//**             VOL=SER=PUB001,
-//**             SPACE=(7200,40,RLSE),
-//**             DCB=(RECFM=FBS,BLKSIZE=7200,LRECL=80),
-//**             DISP=(NEW,CATLG)
+//             REGION.GO=1228K
 //ASM.SYSIN     DD *
+         MACRO
+&L       MSG   &M,&L2
+         LCLC  &A
+&L       BAL   4,WTO
+&A       SETC  'L'''
+         DC    AL2(&A.&L2.-1)
+&L2      DC    C&M
+         MEND   
 * MODIFIED VERSION OF 360D-11.1.019
 *        R.WEAVER, IBM-ARMONK NY, JUNE/JULY 1970
          SPACE
@@ -88,22 +83,18 @@
 *                                                                     * 00004300
 *                                                                     * 00004400
 *********************************************************************** 00004500
+        LCLC &CONSOLE
+        LCLC &TAPE
+        LCLC &MB
+&CONSOLE SETC 'Y'
+&TAPE    SETC 'N'
+&MB      SETC 'Y'                                
        EJECT                                                            00004600
-         MACRO
-&L       MSG   &M,&L2
-         LCLC  &A
-&L       BAL   4,WTO
-&A       SETC  'L'''
-         DC    AL2(&A.&L2.-1)
-&L2      DC    C&M
-         MEND
-         SPACE
-         PRINT NOGEN                                                    14010461
-         START 0                                                        00000100
+       START 0                                                             
        USING   SETBS1,15                                                00004700
        USING   SETBS1+4096,14                                           00004800
-       USING   SIMCOR,7                                                 00004900
-       TITLE  'ADD'                                                     00005000
+       USING   SIMCOR,7
+      TITLE  'ADD'                                        
        USING   A,13                                                     00005100
 A      CH      9,=H'7'           DETERMINE INSTRUCTION LENGTH           00005200
        BE      AL7               *                                      00005300
@@ -228,9 +219,9 @@ AL1I   IC      2,0(12)           GET B-FIELD DIGIT                      00016200
        BE      AL1J              YES                                    00017200
        IC      4,0(11)           NO, GET A-FIELD DIGIT                  00017300
        N       4,=F'15'          *                                      00017400
-       C     4,=F'11'          Q/ IS DIGIT NUMERIC                    00017500
-       BL    *+8               YES                                    00017600
-       S     4,=F'8'           NO, ELIMINATE 8 BIT                    00017700
+       C     4,=F'11'          Q/ IS DIGIT NUMERIC                      00017500
+       BL    *+8               YES                                      00017600
+       S     4,=F'8'           NO, ELIMINATE 8 BIT                      00017700
        CH      4,=H'10'          Q/ ZERO                                00017800
        BNE     *+6               NO                                     00017900
        SR      4,4               YES, CLEAR IT                          00018000
@@ -639,7 +630,7 @@ H1       LR    5,10              CONVERT I ADDRESS                      00056300
          AIF   ('&CONSOLE' EQ 'Y').HWTO2
 H2       B     TERMINAT
 .HWTO2   ANOP
-       CH      9,=H'4'                                                  00057900
+H2       CH    9,=H'4'                                                  00057900
        BNE     H3                                                       00058000
        LA      6,1(10)                                                  00058100
        BAL     8,CVAD43                                                 00058200
@@ -2121,8 +2112,7 @@ WTORTN   XC    RQSTIN,RQSTIN                                            00203400
          STM   13,15,MACREGSV  SAVE MACRO REGS                          00203600
          LA    6,MACREGSV      SAVE ADDRESS TO XR                       00203700
          LA    13,SAVEAREA     GIVE OS OUR SAVE AREA                    00203800
-OKWTOR   WTOR  '                  SIM1401 A002 OK',
-               RQSTIN,50,WTECB                                          00204000
+OKWTOR   WTOR  '                  SIM1401 A002 OK',RQSTIN,50,WTECB      00204000                                                        
          LM    13,15,0(6)      RESTORE MACRO REGISTERS                  00204100
          MVC   SYSPBUFF+1(50),RQSTIN
          STM   13,15,MACREGSV
@@ -2167,6 +2157,7 @@ TESTA    STM   13,15,MACREGSV  SAVE MACRO REG                           00204200
 SNDILG   XC    RQSTIN,RQSTIN   ZERO OUT REPLY AREA                      00211000
          MSG   'A004 ILLEGAL ENTRY',A004                                   21790
          B     WTORTN
+BASE2    DC    A(SETBS1+4096)  
          SPACE
 *      THIS SECTION WILL SIMULATE THE START PUSHBUTTON.  IF THE         00213000
 *      OPERATOR COMMAND STT IS FOLLOWED BY AN ADDRESS, THE 1401 PROGRAM 00213100
@@ -2388,8 +2379,8 @@ SETBCH BAL     8,CVAD43          CONVERT BRANCH ADDRESS                 00251200
          SPACE
 *     THIS SECTION EXAMINES THE NEXT OPERATION CODE AND, BASED UPON IT, 00274000
 *      BRANCHES TO THE PROPER ROUTINE TO PROCESS THE INSTRUCTION.       00274100
-*                                                                       00274200
-NXTOP  AR      10,9              GET NEW OP CODE LOCATION               00274300
+NXTOP  MSG 'I099 FETCHING NEXT OP',I099                                                                       00274200
+       AR      10,9              GET NEW OP CODE LOCATION          BJM  00274300
          TM    0(10),X'40'        Q/ IS THERE A WORD MARK               00274400
        BZ      ILEGOP            NO                                     00274500
        LA      1,250(10)                                                00274600
@@ -2979,6 +2970,10 @@ UCB      DSECT
 UCBWGT   DS    CL1
 UCBNAME  DS    CL3
          END   BEGIN
-//**       EXEC  ASF                                                    *//
-//**C.SYSIN   DD DSN=HERC01.SIM1401,DISP=OLD                              *//
 /*
+//GO.CARDOUT DD DUMMY
+//GO.WRITE   DD SYSOUT=A,DCB=(RECFM=FM,BLKSIZE=133)
+//GO.SYSPRINT   DD SYSOUT=A,DCB=(RECFM=FM,BLKSIZE=133)
+//GO.CARDIN  DD *,DCB=BLKSIZE=80
+,008015,022029,030037,048092L/048299M0802803081,055201,062066/332,073077,088/080
+ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789    
