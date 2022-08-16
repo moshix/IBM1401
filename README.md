@@ -1,6 +1,6 @@
 [![Discord](https://img.shields.io/discord/423767742546575361.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/vpEv3HJ)
 <img alt="Linux" src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black">
-<a href="codenotary.com"><img src="https://raw.githubusercontent.com/moshix/mvs/master/secured-by-immudb.svg" width="130px;"/></a>
+
 
 # IBM 1401 EMULATOR IN BAL 360 ASSEMBLY
 
@@ -8,10 +8,11 @@ This is an emulator for the venerable IBM 1401 mainframe computer of the early 6
 
 It is written in S/360 assembler and assembles with some (for me) unresolvable problems with the Waterloo University Assembler G for  MVS 3.8. You can find the Assembler G here: http://www.jaymoseley.com/hercules/compilers/list_of.htm#ASMG27A
 
-The origianl code we had on this repo didn't assemble cleanly. After work from Bernard Murphy, Gerard Postpischil and others it now cleanly assembles, however there seem to be missing chunks of vode as the program will 0C1 soon when executing 1401 code. Still, interesting code to play with!
+The origianl code we had on this repo didn't assemble cleanly. After work from Bernard Murphy, Gerard Postpischil and others it now cleanly assembles, however there seem to be missing chunks of code as the program will 0C1 soon when executing 1401 code. Still, interesting code to play with!
 
 Instructions on how to run the emulator are in the code itself, but I shall write up a manual, and also make a youtube video available on how to get it to run. 
 
+</pre>
 
      1 4 0 1   S I M U L A T O R   F O R   S Y S T E M / 3 6 0       * 00000500
 
@@ -82,9 +83,9 @@ Instructions on how to run the emulator are in the code itself, but I shall writ
                                                                      * 00004400
 
 ********************************************************************** 00004500
+</pre>
 
 
+enjoy!  
 
-enjoy!
-
-moshix
+moshix. 
