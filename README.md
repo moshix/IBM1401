@@ -6,7 +6,7 @@
 
 This is an emulator for the venerable IBM 1401 mainframe computer of the early 60s. 
 
-It is written in S/360 assembler and assembles with some (for me) unresolvable problems with the Waterloo University Assembler G for  MVS 3.8. You can find the Assembler G here: http://www.jaymoseley.com/hercules/compilers/list_of.htm#ASMG27A
+It is written in S/360 assembler and assembles with the Waterloo University Assembler G for  MVS 3.8. You can find the Assembler G here: http://www.jaymoseley.com/hercules/compilers/list_of.htm#ASMG27A
 
 The original code we had on this repo didn't assemble cleanly. After work from Bernard Murphy, Gerard Postpischil and others it now cleanly assembles.
 
