@@ -1,6 +1,7 @@
 [![Discord](https://img.shields.io/discord/423767742546575361.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/vpEv3HJ)
 <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fmoshix%2FIBM1401&count_bg=%2379C83D&title_bg=%23555555&icon=ibm.svg&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
-
+[![View SBOM](https://img.shields.io/badge/sbom.sh-viewSBOM-blue?link=https%3A%2F%2Fsbom.sh%2F74057199-67a6-4302-b25a-a9bf407782a8)](https://sbom.sh/74057199-67a6-4302-b25a-a9bf407782a8)
+<br>
 
 # IBM 1401 EMULATOR IN BAL 360 ASSEMBLY
 
